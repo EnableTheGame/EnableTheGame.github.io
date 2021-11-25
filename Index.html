@@ -1,0 +1,305 @@
+<!--
+V.1 feita em dois dias para as Eletivas de Inovação do Colégio Alfa de Francisco Beltrão
+
+Créditos:
+V.1.0
+Código por Guilherme Pantano
+Arte por Marco Sbardelotto
+Playtesting e Trabalho Criativo por Miguel Tonello
+Trabalho Promocional por Otavio Mallmann
+Todos os participantes ajudaram em todas as partes, essas foram apenas seus principais trabalhos
+
+V.2.0
+Código por Guilherme Pantano
+Arte por Marco Sbardelotto
+Trabalho criativo e playtesting por Gabriel Tres e Sophia Negri
+Todos os participantes ajudaram em todas as partes, essas foram apenas seus principais trabalhos
+
+Agradecimentos especiais à:
+W3Schools - https://w3schools.com/
+TankTot Games - https://www.youtube.com/channel/UCdwtk889CWDeuG9GEZmLM0w/
+
+Código escrito usando MicroSoft Visual Studio Code - https://code.visualstudio.com/
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+
+
+
+<head>
+   <title>0 Gemas - Gem Miner</title>
+
+   <style>
+      * {
+         box-sizing: border-box;
+         font:arial;
+      }
+      .class1 {
+         float: left;
+         width: 33%;
+      }
+      .class2 {
+         float: left;
+         width: 20%;
+      }
+      .class3 {
+         float: left;
+         width: 47%;
+      }
+      .buybuttonallow {
+         cursor: pointer;
+      }
+   </style>
+</head>
+
+
+
+
+
+
+<body>
+   <div class="class1">
+      <p><span id="Currency">0</span> gemas</p>
+      <p><span id="cfdisplay">1</span> gemas por clique</p>
+      <p><span id="CpS">0</span> gemas por segundo</p>
+      <br><hr>
+      <p>Você possui:</p>
+      <p><span id="click1display">0</span> melhorias para sua picareta</p>
+      <p><span id="click2display">0</span> melhorias para suas vitaminas</p>
+      <p><span id="click3display">0</span> melhorias para seu braço robótico</p>
+      <br>
+      <p><span id="auto1display">0</span> trabalhadores disponíveis</p>
+      <p><span id="auto2display">0</span> picaretas disponíveis</p>
+      <p><span id="auto3display">0</span> brocas disponíveis</p>
+      <br>
+      <p><span id="minerdisplay">0</span> mineiros trabalhando</p>
+      <p><span id="drillerdisplay">0</span> furadores trabalhando</p>
+   </div>
+
+
+   <div class="class2">
+      <img id="gema" src="rock.png" alt="gema" style="width:256px; cursor: pointer;"; onclick="AddCurrency (ClickForce)">
+   </div>
+
+
+   <div class="class3">
+      <p style="font-size:24px">Melhorias</p>
+      <table>
+         <tr>
+            <td>
+               <button class="buybuttonallow" style="width:200px; height:75px" onclick="BuyClick1 ()">Comprar 1 melhoria para picareta (+1)
+               <br> <hr><span id="ClickCost1">100</span> Gemas</button>
+            </td>
+            <td>
+               <button class="buybuttonallow" style="width:200px; height:75px" onclick="BuyClick2 ()">Comprar 1 melhoria para vitaminas (+6)
+               <br> <hr><span id="ClickCost2">500</span> Gemas</button>
+            </td>
+            <td>
+               <button class="buybuttonallow" style="width:200px; height:75px" onclick="BuyClick3 ()">Comprar 1 melhoria para braço robótico (+10%)
+               <br> <hr><span id="ClickCost3">6000</span> Gemas</button>
+            </td>
+         </tr>
+      </table>
+      <hr>
+      <table>
+         <tr>
+            <td>
+               <button class="buybuttonallow" style="width:200px; height:75px" onclick="BuyAuto1 ()">Contratar 1 trabalhador
+               <br> <hr>Custa <span id="AutoCost1">900</span> Gemas</button>
+            </td>
+            <td>
+               <button class="buybuttonallow" style="width:200px; height:75px" onclick="BuyAuto2 ()">Comprar 1 picareta nova
+               <br> <hr>Custa <span id="AutoCost2">750</span> Gemas</button>
+            </td>
+            <td>
+               <button class="buybuttonallow" style="width:200px; height:75px" onclick="BuyAuto3 ()">Comprar 1 broca nova
+               <br> <hr>Custa <span id="AutoCost3">1750</span> Gemas</button>
+            </td>
+         </tr>
+      </table>
+      <table>
+         <tr>
+            <td>
+               <button class="buybuttonallow" style="width:200px; height:75px" onclick="makeminer ()">Atribuir 1 mineiro (+5/s)
+               <br> <hr>Usa 1 trabalhador e 1 picareta</button>
+               <button class="buybuttonallow" style="width:200px; height:75px" onclick="makedriller ()">Atribuir 1 furador (+10/s)
+               <br> <hr>Usa 1 trabalhador e 1 broca</button>
+            </td>
+         </tr>
+      </table>
+   </div>
+
+
+   
+   <!--Script para Declaração de variáveis-->
+   <script>
+      var Currency = 0;
+      var CpS = 0;
+
+      var ClickForce = 1;
+
+      var Click1 = 0;
+      var ClickCost1 = 100;
+      var Click2 = 0;
+      var ClickCost2 = 500;
+      var Click3 = 0;
+      var ClickCost3 = 6000;
+
+      var Auto1 = 0;
+      var AutoCost1 = 9000;
+      var Auto2 = 0;
+      var AutoCost2 = 750;
+      var Auto3 = 0;
+      var AutoCost3 = 1750;
+
+      var miner = 0;
+      var driller = 0;
+
+      var haspick = false;
+      var hasvitamin = false;
+      var hasroboarm = false;
+   </script>
+
+
+
+   <!--Este script cuida dos cálculos relacionados ao click-->
+   <script>
+      function AddCurrency (amount) {
+            Currency = Currency + amount
+            document.getElementById("Currency") .innerHTML = Currency;
+      }
+   </script>
+   
+
+
+   <!--Este script cuida das compras de melhorias-->
+   <script>
+      function BuyAuto1 () {
+         if (Currency >= AutoCost1) {
+            Currency = Currency - AutoCost1
+            Auto1 = Auto1 + 1
+            AutoCost1 = Math.round (AutoCost1 * 1.25)
+         
+            document.getElementById("Currency").innerHTML = Currency;
+            document.getElementById("AutoCost1").innerHTML = AutoCost1;
+            document.getElementById("Auto1").innerHTML = Auto1;
+            document.getElementById("auto1display").innerHTML = Auto1; 
+         }
+      }   
+
+      function BuyAuto2 () {
+         if (Currency >= AutoCost2) {
+            Currency = Currency - AutoCost2
+            Auto2 = Auto2 + 1
+            AutoCost2 = Math.round (AutoCost2 * 1.25)
+         
+            document.getElementById("Currency").innerHTML = Currency;
+            document.getElementById("AutoCost2").innerHTML = AutoCost2;
+            document.getElementById("Auto2").innerHTML = Auto2;
+         }
+      }
+
+      function BuyAuto3 () {
+         if (Currency >= AutoCost3) {
+            Currency = Currency - AutoCost3
+            Auto3 = Auto3 + 1
+            AutoCost3 = Math.round (AutoCost3 * 1.25)
+         
+            document.getElementById("Currency").innerHTML = Currency;
+            document.getElementById("AutoCost3").innerHTML = AutoCost3;
+            document.getElementById("Auto3").innerHTML = Auto3;
+         }
+      }
+
+
+
+      function BuyClick1 () {
+         if (Currency >= ClickCost1) {
+            Currency = Currency - ClickCost1
+            Click1 = Click1 + 1
+            ClickCost1 = Math.round (ClickCost1 * 1.25)
+            ClickForce = Click1 + Click2 * 6 + (Click3 * 1.10) * (Click1 + Click2 * 6) + 1;
+         
+            document.getElementById ("Currency") .innerHTML = Currency;
+            document.getElementById ("ClickCost1") .innerHTML = ClickCost1;
+            document.getElementById ("Click1") .innerHTML = Click1;
+         }
+      }
+
+      function BuyClick2 () {
+         if (Currency >= ClickCost2) {
+            Currency = Currency - ClickCost2
+            Click2 = Click2 + 1
+            ClickCost2 = Math.round (ClickCost2 * 1.25)
+            ClickForce = Click1 + Click2 * 6 + (Click3 * 1.10) * (Click1 + Click2 * 6) + 1;
+         
+            document.getElementById ("Currency") .innerHTML = Currency;
+            document.getElementById ("ClickCost2") .innerHTML = ClickCost2;
+            document.getElementById ("Click2") .innerHTML = Click2;
+         }
+      }
+
+      function BuyClick3 () {
+         if (Currency >= ClickCost3) {
+            Currency = Currency - ClickCost3
+            Click3 = Click3 + 1
+            ClickCost3 = Math.round (ClickCost3 * 1.25)
+            ClickForce = Click1 + Click2 * 6 + (Click3 * 1.10) * (Click1 + Click2 * 6) + 1;
+         
+            document.getElementById ("Currency") .innerHTML = Currency;
+            document.getElementById ("ClickCost3") .innerHTML = ClickCost3;
+            document.getElementById ("Click3") .innerHTML = Click3;
+         }
+      }
+      function makeminer () {
+         if (Auto1 > 0 && Auto2 > 0){
+            Auto1 = Auto1 - 1;
+            Auto2 = Auto2 - 1;
+            miner = miner + 1;
+
+            document.getElementById("minerdisplay").innerHTML = miner
+         }
+      }
+      function makedriller () {
+         if (Auto1 > 0 && Auto3 > 0){
+            Auto1 = Auto1 - 1;
+            Auto2 = Auto3 - 1;
+            driller = driller + 1;
+
+            document.getElementById("drillerdisplay").innerHTML = driller
+         }
+      }
+   </script>
+
+
+
+   <!--Este script cuida dos calculos das melhorias automáticas-->
+   <script>
+      setInterval (function () {
+         Currency = Currency + miner * 5;
+         document.getElementById ("Currency") .innerHTML = Currency;
+      }, 1000)
+
+      setInterval (function () {
+         Currency = Currency + driller * 10;
+         document.getElementById ("Currency") .innerHTML = Currency;
+      }, 1000)
+   </script>
+
+
+
+   <!--Este script cuida de outras coisas, como o layout da página-->
+   <script>
+      function UpdateCpS () {
+         CpS = miner * 5 + driller * 10;
+         document.getElementById("CpS").innerHTML = CpS;
+      }
+   
+
+      setInterval (function () {
+        document.title = Currency + " Gemas - Gem Miner"
+      }, 1000)
+   </script>
+</body>
